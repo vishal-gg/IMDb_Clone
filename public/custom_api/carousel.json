@@ -1,0 +1,37 @@
+[
+  {
+    "image": "assets/media/poor_things.jpg",
+    "poster": "assets/media/poor_things_poster.jpg",
+    "title": "Emma Stone in Poor Things"
+  },
+  {
+    "image": "assets/media/on_the_scene.jpg",
+    "poster": "assets/media/on_the_scene_poster.jpg",
+    "title": "Was Tom Holland Scared of His Crowded Room Role?"
+  },
+  {
+    "image": "assets/media/transformer.jpg",
+    "poster": "assets/media/transformer_poster.jpg",
+    "title": "Transformers: Rise of the Beasts"
+  },
+  {
+    "image": "assets/media/warrior.jpg",
+    "poster": "assets/media/warrior_poster.jpg",
+    "title": "Warrior Returns"
+  },
+  {
+    "image": "assets/media/ashoka.jpg",
+    "poster": "assets/media/ashoka_poster.jpg",
+    "title": "Get a First Look at Ashoka"
+  },
+  {
+    "image": "assets/media/expend4bles.jpg",
+    "poster": "assets/media/expend4bles_poster.jpg",
+    "title": "Expend4bles"
+  },
+  {
+    "image": "assets/media/the_witcher.jpg",
+    "poster": "assets/media/the_witcher_poster.jpg",
+    "title": "Henry Cevill Is The Witcher"
+  }
+]
