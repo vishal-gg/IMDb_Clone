@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import axios from "axios";
+import axios, {CancelTokenSource} from "axios";
 import { Movie, APIResponse } from "./interfaces";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -16,12 +16,19 @@ function SearchQuery({ inputSearch, inputFocused }: PropsType) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const divRef = useRef<HTMLDivElement | null>(null);
+  const cancelToken = useRef<CancelTokenSource | undefined>(undefined);
 
   useEffect(() => {
     const searchIMDb = async () => {
       if (!inputSearch) {
         return;
       }
+
+      if (cancelToken.current) {
+        cancelToken.current.cancel('cancel previous request');
+      }
+  
+      cancelToken.current = axios.CancelToken.source();
 
       const options = {
         method: "GET",
@@ -31,6 +38,7 @@ function SearchQuery({ inputSearch, inputFocused }: PropsType) {
           "X-RapidAPI-Key": apiKey,
           "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
         },
+        cancelToken: cancelToken.current?.token
       };
 
       try {
@@ -38,17 +46,20 @@ function SearchQuery({ inputSearch, inputFocused }: PropsType) {
         const { data } = await axios<APIResponse>(options);
         setIsLoading(false);
         setSearchResult(data.d);
-      } catch (err: any) {
-        console.warn(err);
-        setIsLoading(false);
-        setError(err.message);
+      } catch (error:any) {
+        if (!axios.isCancel(error)) {
+          setError(error.response.data.message)
+        } 
       }
     };
 
-    const debounceTimer = setTimeout(searchIMDb, 1000);
+    searchIMDb()
+
     return () => {
-      clearTimeout(debounceTimer);
-    };
+        if (cancelToken.current) {
+          cancelToken.current.cancel('cancel request on component unmount');
+        }
+      }
   }, [inputSearch]);
 
   useEffect(() => {
@@ -153,7 +164,7 @@ function SearchQuery({ inputSearch, inputFocused }: PropsType) {
           ></motion.span>
         </motion.div>
       ) : (
-        <pre className="text-red-500">{JSON.stringify(error, null, 2)}</pre>
+        <div className="text-red-500 text-center">{error}</div>
       )}
     </motion.div>
   );

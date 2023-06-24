@@ -30,7 +30,7 @@ function QueryDetails() {
       "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
     },
   };
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [id + "overview-details"],
     queryFn: async () => {
       const { data } = await axios<MovieDetails>(options);
@@ -67,7 +67,7 @@ function QueryDetails() {
     return `${hours}h${minutes === 0 ? "" : ` ${minutes}min`}`;
   }
 
-  console.log(data);
+  console.log(isError);
   console.log(data_2);
 
   const skeletonTransition = {
@@ -246,8 +246,10 @@ function QueryDetails() {
             </div>
           </div>
         </>
-      ) : (
+      ) : !isError ? (
         <Skeleton />
+      ) : (
+        <div className="text-red-500">something went wrong!</div>
       )}
     </div>
   );

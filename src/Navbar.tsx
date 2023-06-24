@@ -42,7 +42,10 @@ function Navbar() {
   }, []);
 
   useEffect(()=>{
-    setInputSearch("")
+    const timeout = setTimeout(() => {
+      setInputSearch("")
+    }, 500);
+    return () => clearTimeout(timeout)
   },[navigate])
 
   return (
