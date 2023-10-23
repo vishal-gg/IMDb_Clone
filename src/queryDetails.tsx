@@ -78,7 +78,7 @@ function QueryDetails() {
   };
 
   return (
-    <div className="text-white relative min-[578px]:px-16 px-6 py-12 max-[992px]:py-8 min-h-screen">
+    <div className="text-white relative min-[578px]:px-16 px-6 py-12 max-[992px]:py-8 min-h-[90vh]">
       <div
         className="absolute inset-0 -z-10 h-full bg-cover bg-no-repeat bg-[center_top] blur-3xl bg-neutral-500 bg-blend-multiply"
         style={{ backgroundImage: `url(${data?.title.image?.url})` }}

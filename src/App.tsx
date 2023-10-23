@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="max-w-[1500px] mx-auto">
+    <div>
       <Navbar />
       <Routes>
         <Route

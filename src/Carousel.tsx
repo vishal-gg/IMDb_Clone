@@ -64,7 +64,7 @@ function Carousel() {
 
   return (
     <main>
-      <div className="flex gap-4 px-8 py-2 bg-black text-white overflow-hidden selection:bg-none">
+      <div className="flex gap-4 px-8 py-2 bg-black text-white overflow-hidden selection:bg-none max-w-[1500px] mx-auto">
         <section
           ref={ref}
           style={{ aspectRatio: "16/10.2" }}
